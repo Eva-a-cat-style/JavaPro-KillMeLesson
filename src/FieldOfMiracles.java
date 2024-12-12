@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class FieldOfMiracles {
     public static void main(String[] args) {
         String[] words = {"apple", "orange", "lemon", "banana", "apricot",
-                "avocado", "broccoli", "carrot", "cherry", " garlic",
+                "avocado", "broccoli", "carrot", "cherry", "garlic",
                 "grape", "melon", "leak", "kiwi", "mango", "mushroom",
-                "nut", "olive", " pea", "peanut", "pear", "pepper",
+                "nut", "olive", "pea", "peanut", "pear", "pepper",
                 "pineapple", "pumpkin", "potato"};
 
         Random random = new Random();
@@ -20,22 +20,21 @@ public class FieldOfMiracles {
 
         while (!guessed) {
             System.out.println("Guess a word: " + Arrays.toString(words));
-            String userWord = scanner.nextLine();//.toLowerCase();
+            String userWord = scanner.nextLine();
 
             if (userWord.equals(word)) {
                 System.out.println("You guessed it! " + word);
                 guessed = true;
             } else {
-                StringBuilder clue = new StringBuilder();
-                for (int i = 0; i < 15; i++) {
-                    if (i < userWord.length() && i < word.length() &&
-                            userWord.charAt(i) == word.charAt(i)) {
-                        clue.append(word.charAt(i));
+                char[] clue = new char[15];
+                for (int i = 0; i < clue.length; i++) {
+                    if (i < userWord.length() && i < word.length() && userWord.charAt(i) == word.charAt(i)) {
+                        clue[i] = word.charAt(i);
                     } else {
-                        clue.append('#');
+                        clue[i] = '#';
                     }
                 }
-                System.out.println("Clue: " + clue);
+                System.out.println("Clue: " + new String(clue));
             }
         }
         scanner.close();
