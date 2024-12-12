@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class FieldOfMiracles {
     public static void main(String[] args) {
         String[] words = {"apple", "orange", "lemon", "banana", "apricot",
-                "avocado", "broccoli", "carrot", "cherry", " garlic",
+                "avocado", "broccoli", "carrot", "cherry", "garlic",
                 "grape", "melon", "leak", "kiwi", "mango", "mushroom",
-                "nut", "olive", " pea", "peanut", "pear", "pepper",
+                "nut", "olive", "pea", "peanut", "pear", "pepper",
                 "pineapple", "pumpkin", "potato"};
 
         Random random = new Random();
@@ -16,16 +16,19 @@ public class FieldOfMiracles {
         String word = words[random.nextInt(words.length)];
         System.out.println("Try to guess the word");
 
+        GameLimiter limiter = new GameLimiter(5);
+
         boolean guessed = false;
 
-        while (!guessed) {
+        while (!guessed && !limiter.isOutOfAttempts()) {
             System.out.println("Guess a word: " + Arrays.toString(words));
-            String userWord = scanner.nextLine();//.toLowerCase();
+            String userWord = scanner.nextLine();
 
             if (userWord.equals(word)) {
                 System.out.println("You guessed it! " + word);
                 guessed = true;
             } else {
+                System.out.println("Wrong guess! Attempts left: " + limiter.useAttempt());
                 StringBuilder clue = new StringBuilder();
                 for (int i = 0; i < 15; i++) {
                     if (i < userWord.length() && i < word.length() &&
@@ -38,6 +41,11 @@ public class FieldOfMiracles {
                 System.out.println("Clue: " + clue);
             }
         }
+
+        if (!guessed) {
+            System.out.println("Game over! The correct word was: " + word);
+        }
+
         scanner.close();
     }
 }

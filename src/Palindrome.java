@@ -4,3 +4,4 @@ public class Palindrome {
         return reverse.equals(str);
     }
 }
+
