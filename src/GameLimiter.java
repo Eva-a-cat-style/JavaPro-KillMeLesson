@@ -5,7 +5,6 @@ public class GameLimiter {
         this.attemptsLeft = maxAttempts;
     }
 
-
     public int useAttempt() {
         if (attemptsLeft > 0) {
             attemptsLeft--;

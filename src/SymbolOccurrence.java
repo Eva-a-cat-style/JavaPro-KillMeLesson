@@ -5,7 +5,6 @@ public class SymbolOccurrence {
             if(currentChar == symbol){
                 count++;
 
-
             }
         }
         return count;
