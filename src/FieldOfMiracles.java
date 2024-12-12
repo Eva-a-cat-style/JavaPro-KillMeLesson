@@ -16,9 +16,11 @@ public class FieldOfMiracles {
         String word = words[random.nextInt(words.length)];
         System.out.println("Try to guess the word");
 
+        GameLimiter limiter = new GameLimiter(5);
+
         boolean guessed = false;
 
-        while (!guessed) {
+        while (!guessed && !limiter.isOutOfAttempts()) {
             System.out.println("Guess a word: " + Arrays.toString(words));
             String userWord = scanner.nextLine();
 
@@ -26,17 +28,24 @@ public class FieldOfMiracles {
                 System.out.println("You guessed it! " + word);
                 guessed = true;
             } else {
-                char[] clue = new char[15];
-                for (int i = 0; i < clue.length; i++) {
-                    if (i < userWord.length() && i < word.length() && userWord.charAt(i) == word.charAt(i)) {
-                        clue[i] = word.charAt(i);
+                System.out.println("Wrong guess! Attempts left: " + limiter.useAttempt());
+                StringBuilder clue = new StringBuilder();
+                for (int i = 0; i < 15; i++) {
+                    if (i < userWord.length() && i < word.length() &&
+                            userWord.charAt(i) == word.charAt(i)) {
+                        clue.append(word.charAt(i));
                     } else {
-                        clue[i] = '#';
+                        clue.append('#');
                     }
                 }
-                System.out.println("Clue: " + new String(clue));
+                System.out.println("Clue: " + clue);
             }
         }
+
+        if (!guessed) {
+            System.out.println("Game over! The correct word was: " + word);
+        }
+
         scanner.close();
     }
 }
