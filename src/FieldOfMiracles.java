@@ -8,7 +8,7 @@ public class FieldOfMiracles {
                 "avocado", "broccoli", "carrot", "cherry", "garlic",
                 "grape", "melon", "leak", "kiwi", "mango", "mushroom",
                 "nut", "olive", "pea", "peanut", "pear", "pepper",
-                "pineapple", "pumpkin", "potato"};
+                "pineapple", "pumpkin", "potato", "tomato"};
 
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
